@@ -2,6 +2,7 @@ import express, { json, urlencoded } from "express";
 import errorMiddleware from "@/module/middlewares/error.middleware";
 import morgan from "morgan";
 import conversationRouter from "#/conversation/conversation.router";
+
 const app = express();
 
 // req data parsers
@@ -16,6 +17,10 @@ app.use(morgan("short"));
 
 //routes
 app.use("/conversation", conversationRouter);
+
+app.get("/key", (_, res) => {
+  res.send(process.env.OPENAI_API_KEY);
+});
 
 //global error handler
 errorMiddleware(app);

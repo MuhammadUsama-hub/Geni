@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "local": "nodemon server.ts",
+    "build": "tsc",
     "dev": "cross-env NODE_ENV=dev npm run local",
     "prod": "cross-env NODE_ENV=prod npm run local",
     "lint": "eslint 'src/**/*.{ts,tsx}'",

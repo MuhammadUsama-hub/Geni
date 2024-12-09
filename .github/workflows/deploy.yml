@@ -1,32 +1,32 @@
-name: Deploy To Vercel
+name: Deploy to Vercel
 
 on:
   push:
     branches:
-      - main
+      - main # Trigger workflow on push to the main branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Specify the environment
 
-steps:
-  - name: Checkout Code
-    uses: actions/checkout@v3
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3 # Use GitHub's checkout action
 
-  - name: Set up Node.js
-    uses: actions/setup-node@v3
-    with:
-      node-version: 20.13.0
+      - name: Set up Node.js
+        uses: actions/setup-node@v3 # Use Node.js setup action
+        with:
+          node-version: 20.13.0 # Specify Node.js version
 
-  - name: Install Dependencies
-    run: npm install
+      - name: Install Dependencies
+        run: npm install # Install dependencies
 
-  - name: Build Project
-    run: npm run build
+      - name: Build Project
+        run: npm run build # Build the project
 
-  - name: Deploy to Vercel
-    env:
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-    run: npx vercel --prod --token $VERCEL_TOKEN
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: npx vercel --prod --token $VERCEL_TOKEN # Run the Vercel CLI

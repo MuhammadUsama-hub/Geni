@@ -2,6 +2,7 @@ import express, { json, urlencoded } from "express";
 import errorMiddleware from "@/module/middlewares/error.middleware";
 import morgan from "morgan";
 import conversationRouter from "#/conversation/conversation.router";
+import userRouter from "./module/users/user.router";
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(morgan("short"));
 
 //routes
 app.use("/conversation", conversationRouter);
+
+app.use("/users", userRouter);
 
 app.get("/key", (_, res) => {
   res.send(process.env.OPENAI_API_KEY);

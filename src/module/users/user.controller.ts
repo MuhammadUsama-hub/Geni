@@ -1,11 +1,25 @@
 import { Request, Response } from "express";
 import UserService from "./user.service";
+import { APIResponse } from "@/lib/types/mics";
+import { User } from "./user.types";
+import { toResponse } from "@/lib/utils";
+import { statusConst } from "@/lib/utils/status";
 
-const create = async (req: Request, res: Response): Promise<any> => {
+const create = async (
+  req: Request,
+  res: Response
+): Promise<APIResponse<User>> => {
   const user = await UserService.create(req.body);
-  if (!user) return res.status(400).json({ message: "internal error" });
+  if (!user)
+    return toResponse({
+      error: statusConst.internal.message,
+      status: statusConst.internal.code,
+    });
 
-  return res.status(200).json({ data: user });
+  return toResponse({
+    data: user,
+    status: statusConst.created.code,
+  });
 };
 
 const UserController = {

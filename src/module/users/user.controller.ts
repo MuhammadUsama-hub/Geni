@@ -1,14 +1,11 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import UserService from "./user.service";
 import { APIResponse } from "@/lib/types/mics";
 import { User } from "./user.types";
 import { toResponse } from "@/lib/utils";
 import { statusConst } from "@/lib/utils/status";
 
-const create = async (
-  req: Request,
-  res: Response
-): Promise<APIResponse<User>> => {
+const create = async (req: Request): Promise<APIResponse<User>> => {
   const user = await UserService.create(req.body);
   if (!user)
     return toResponse({

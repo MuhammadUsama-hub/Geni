@@ -1,8 +1,1 @@
-export interface APIResponse<T = null> {
-  data: T | null;
-  error: string | null;
-  status: number | null;
-}
-export type Message = {
-  message: string;
-};
+export type Expand<T> = { [K in keyof T]: T[K] };

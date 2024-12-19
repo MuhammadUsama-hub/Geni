@@ -5,12 +5,10 @@ import { statusConst } from "@/lib/utils/status";
 export const create = async (req: Request, res: Response) => {
   const user = await UserService.create(req.body);
   if (!user) {
-    res
+    return res
       .status(statusConst.internal.code)
       .json({ error: statusConst.internal.message });
-    return;
   }
 
-  res.status(statusConst.created.code).json({ data: user, error: null });
-  return;
+  return res.status(statusConst.created.code).json({ data: user, error: null });
 };

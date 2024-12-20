@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import ConversationServices from "./conversation.service";
 import { statusConst } from "@/lib/utils/status";
 
-const create = async (req: Request, res: Response): Promise<any> => {
+const create = async (req: Request, res: Response) => {
   const answer = await ConversationServices.create(req.body);
   if (!answer)
     return res.json({
